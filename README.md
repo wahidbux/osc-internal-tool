@@ -1,135 +1,147 @@
-# Turborepo starter
+# OSC INTERNAL EVENT MANAGEMENT TOOL
 
-This Turborepo starter is maintained by the Turborepo core team.
+A scalable platform to streamline event organization, content creation, social media management, logistics, and student attendance tracking.
 
-## Using this example
+This system supports multiple user roles (Students, Team Admins, Social Media, Content, Organising, and Logistics teams) to enable seamless collaboration and efficient event execution.
 
-Run the following command:
+## Project Information
 
-```sh
-npx create-turbo@latest
-```
+- **Data Flow Diagram:** [View on Miro](https://miro.com/app/board/uXjVJFNPJLE=/?share_link_id=893640861608)
+- **Project Requirement Details:** [View on Docs](https://docs.google.com/document/d/1blOG6nZYnFMEGScKpHMvuBXcNOxC6co4l9ds6379obc/edit?usp=sharing)
 
-## What's inside?
+## 🚀 Features
 
-This Turborepo includes the following packages/apps:
+### 🔑 Authentication & Access
 
-### Apps and Packages
+- Secure registration and login for Students and Team Admins
+- Password reset/recovery
+- Role-Based Access Control (RBAC)
 
-- `docs`: a [Next.js](https://nextjs.org/) app
-- `web`: another [Next.js](https://nextjs.org/) app
-- `@repo/ui`: a stub React component library shared by both `web` and `docs` applications
-- `@repo/eslint-config`: `eslint` configurations (includes `eslint-config-next` and `eslint-config-prettier`)
-- `@repo/typescript-config`: `tsconfig.json`s used throughout the monorepo
+### 🎟 Attendance Management
 
-Each package/app is 100% [TypeScript](https://www.typescriptlang.org/).
+- QR code generation for attendance
+- Real-time attendance capture
+- Walk-in entry tracking
+- Automatic attendance generation linked to student profiles
 
-### Utilities
+### 👩‍🎓 Student Management (Team Admin)
 
-This Turborepo has some additional tools already setup for you:
+- Manage student profiles
+- View student list
+- Record disciplinary actions
 
-- [TypeScript](https://www.typescriptlang.org/) for static type checking
-- [ESLint](https://eslint.org/) for code linting
-- [Prettier](https://prettier.io) for code formatting
+### 📱 Social Media Team
 
-### Build
+- Post generation (text, image, video)
+- Drafting, editing, and reworking posts
+- Post scheduling with calendar view & reminders
+- Version control for social posts
 
-To build all apps and packages, run the following command:
+### ✍️ Content Team
 
-```
-cd my-turborepo
+- Collaborative speech drafting with version history
+- Blog/article/write-up creation with rich text formatting
+- Documentation generator for event briefs, reports, and summaries
 
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build
+### 📅 Organising Team
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build
-yarn dlx turbo build
-pnpm exec turbo build
-```
+- Event planning (dates, venues, descriptions)
+- Task & milestone tracking
+- Idea box with voting and comments
+- Meeting scheduler with calendar integration
+- Hiring portal for onboarding new students into teams
 
-You can build a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+### 🚚 Logistics Team
 
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo build --filter=docs
+- Collect and analyze event feedback & surveys
+- Social media engagement analysis
+- Online event monitoring (participants, engagement, etc.)
+- Attendance logistics coordination with real-time updates
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo build --filter=docs
-yarn exec turbo build --filter=docs
-pnpm exec turbo build --filter=docs
-```
+## 🛠️ Tech Stack
 
-### Develop
+- **Frontend:** Next.js (React)
+- **Backend:** Node.js (Express.js)
+- **Database:** MongoDB
+- **ORM/ODM:** Prisma
+- **Monorepo Management:** Turborepo
+- **Containerization:** Docker
 
-To develop all apps and packages, run the following command:
-
-```
-cd my-turborepo
-
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev
-yarn exec turbo dev
-pnpm exec turbo dev
-```
-
-You can develop a specific package by using a [filter](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters):
+## 📂 Project Structure
 
 ```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo dev --filter=web
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo dev --filter=web
-yarn exec turbo dev --filter=web
-pnpm exec turbo dev --filter=web
+apps/
+├── client/                 # Next.js frontend
+│   ├── public/            # Static assets
+│   ├── src/               # Frontend source code
+│   ├── package.json
+│   └── tsconfig.json
+│
+├── server/                # Express.js backend
+│   ├── src/               # Backend source code
+│   ├── package.json
+│   └── tsconfig.json
+│
+docker/                    # Docker-related configs
+packages/                  # Shared libraries/configs
+node_modules/
+.env.example
+.gitignore
+.npmrc
+bun.lock
+CODE_OF_CONDUCT.md
+Contributions.md
+docker-compose.yml
+License.md
+package*.json
+README.md
+turbo.json
 ```
 
-### Remote Caching
+## ⚙️ Setup & Installation
 
-> [!TIP]
-> Vercel Remote Cache is free for all plans. Get started today at [vercel.com](https://vercel.com/signup?/signup?utm_source=remote-cache-sdk&utm_campaign=free_remote_cache).
+### Prerequisites
 
-Turborepo can use a technique known as [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching) to share cache artifacts across machines, enabling you to share build caches with your team and CI/CD pipelines.
+- Node.js 20+
+- Docker & Docker Compose
+- MongoDB instance
 
-By default, Turborepo will cache locally. To enable Remote Caching you will need an account with Vercel. If you don't have an account you can [create one](https://vercel.com/signup?utm_source=turborepo-examples), then enter the following commands:
+### Steps
 
-```
-cd my-turborepo
+```bash
+# 1. Clone the repo
+git clone https://github.com/Open-Source-Chandigarh/osc-internal-tool.git
 
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo login
+cd osc-internal-tool
 
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo login
-yarn exec turbo login
-pnpm exec turbo login
-```
+# 2. Bun Install dependencies (monorepo)
+npm install -g bun
+bun install
 
-This will authenticate the Turborepo CLI with your [Vercel account](https://vercel.com/docs/concepts/personal-accounts/overview).
-
-Next, you can link your Turborepo to your Remote Cache by running the following command from the root of your Turborepo:
-
-```
-# With [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation) installed (recommended)
-turbo link
-
-# Without [global `turbo`](https://turborepo.com/docs/getting-started/installation#global-installation), use your package manager
-npx turbo link
-yarn exec turbo link
-pnpm exec turbo link
+# 3. Start development
+bun run dev
 ```
 
-## Useful Links
+## 📖 Usage
 
-Learn more about the power of Turborepo:
+- **Students:** Register, log in, and mark attendance
+- **Team Admins:** Manage students, disciplinary actions, and oversee activities
+- **Social Media Team:** Create, edit, and schedule posts
+- **Content Team:** Draft speeches, generate docs, and write posts
+- **Organising Team:** Plan events, manage ideas, schedule meetings, and handle hiring
+- **Logistics Team:** Collect feedback, analyze online events, and manage attendance logistics
 
-- [Tasks](https://turborepo.com/docs/crafting-your-repository/running-tasks)
-- [Caching](https://turborepo.com/docs/crafting-your-repository/caching)
-- [Remote Caching](https://turborepo.com/docs/core-concepts/remote-caching)
-- [Filtering](https://turborepo.com/docs/crafting-your-repository/running-tasks#using-filters)
-- [Configuration Options](https://turborepo.com/docs/reference/configuration)
-- [CLI Usage](https://turborepo.com/docs/reference/command-line-reference)
+## 🔮 Future Enhancements
+
+- Payment gateway for ticket sales
+- Push notifications for event updates
+- Advanced analytics dashboards
+- Integration with 3rd-party social media platforms for direct publishing
+
+## 🤝 Contribution
+
+We welcome contributions! Please fork the repo, create a feature branch, and open a pull request.
+
+## 📜 License
+
+This project is licensed under the terms of the MIT License.

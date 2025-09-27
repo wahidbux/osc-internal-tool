@@ -1,0 +1,141 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+enum Role {
+  USER
+  LEAD
+  ADMIN
+  SUBHEAD
+}
+
+enum EventType {
+  WORKSHOP
+  HACKATHON
+}
+
+enum EntryType {
+  REGISTERED
+  WALKIN
+}
+
+enum Attendance {
+  PRESENT
+  ABSENT
+}
+
+enum Socials {
+  INSTAGRAM
+  LINKEDIN
+  DISCORD
+  COMMUDLE
+}
+
+model user {
+  id               String             @id @default(auto()) @map("_id") @db.ObjectId
+  name             String
+  rollnumber       String             @unique
+  email            String             @unique
+  password         String
+  role             Role               @default(USER)
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @default(now())
+  teamMember       teamMember[]
+  event            event[]
+  eventParticipant eventParticipant[]
+}
+
+model team {
+  id          String       @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  description String?
+  createdAt   DateTime     @default(now())
+  updatedAt   DateTime     @default(now())
+  teamMember  teamMember[]
+}
+
+model teamMember {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String   @db.ObjectId
+  user      user     @relation(references: [id], fields: [userId])
+  teamId    String   @db.ObjectId
+  team      team     @relation(fields: [teamId], references: [id])
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+}
+
+model event {
+  id                 String               @id @default(auto()) @map("_id") @db.ObjectId
+  name               String
+  tagline            String
+  eventStartDate     DateTime
+  eventEndDate       DateTime
+  eventCategory      EventType
+  eventPoster        String
+  createdBy          String               @db.ObjectId
+  creator            user                 @relation(fields: [createdBy], references: [id])
+  eventParticipant   eventParticipant[]
+  eventCalendar      eventCalendar[]
+  createdAt          DateTime             @default(now())
+  updatedAt          DateTime             @default(now())
+  eventDocumentation eventDocumentation[]
+  eventPost          eventPost[]
+}
+
+model eventParticipant {
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  userId    String     @db.ObjectId
+  user      user       @relation(fields: [userId], references: [id])
+  eventId   String     @db.ObjectId
+  event     event      @relation(fields: [eventId], references: [id])
+  isPresent Attendance
+  entryType EntryType
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @default(now())
+}
+
+model eventCalendar {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  eventDate   DateTime
+  title       String
+  description String
+  eventId     String   @db.ObjectId
+  event       event    @relation(fields: [eventId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+}
+
+model eventDocumentation {
+  id          String   @id @default(auto()) @map("_id") @db.ObjectId
+  name        String
+  title       String
+  content     String
+  externalRef String
+  eventId     String   @db.ObjectId
+  event       event    @relation(fields: [eventId], references: [id])
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+}
+
+model eventPost {
+  id               String   @id @default(auto()) @map("_id") @db.ObjectId
+  name             String
+  platform         Socials
+  externalRef      String
+  postScheduleDate DateTime
+  eventId          String   @db.ObjectId
+  event            event    @relation(fields: [eventId], references: [id])
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @default(now())
+}
