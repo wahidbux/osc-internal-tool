@@ -12,6 +12,7 @@ import helmet from "helmet";
 import hpp from "hpp";
 import "dotenv/config";
 import passport from "passport";
+import "./utils/passport";
 import type { Express } from "express";
 import morgan from "morgan";
 
@@ -36,7 +37,7 @@ app.use(
       secure: false, // true if using HTTPS
       sameSite: "lax", // "none" if cross-origin over HTTPS
     },
-  }),
+  })
 );
 app.use(passport.initialize() as any);
 app.use(passport.session());
@@ -58,7 +59,7 @@ app.use(
       "Origin",
       "Accept",
     ],
-  }),
+  })
 );
 
 //error handling
@@ -90,7 +91,7 @@ app.get("/health", async (req, res) => {
 // OAuth Routes
 app.get(
   "/auth/github",
-  passport.authenticate("github", { scope: ["user", "repo"] }),
+  passport.authenticate("github", { scope: ["user", "repo"] })
 );
 app.get("/is-authenticated", (req, res) => {
   const isAuthenticated = req.isAuthenticated();
@@ -111,14 +112,14 @@ app.get(
   }),
   function (req, res) {
     res.redirect("/");
-  },
+  }
 );
 
 const errorHandler = (
   error: any,
   req: Request,
   res: Response,
-  next: NextFunction,
+  next: NextFunction
 ) => {
   console.log({
     error: error,
