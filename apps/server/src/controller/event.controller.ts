@@ -5,5 +5,11 @@ import type { Request, Response } from "express";
  * functionalities realted to user functions that are defined below.
  */
 
-class eventController {}
+class eventController {
+  async createEvent(req: Request, res: Response) {}
+  async removeEvent(req: Request, res: Response) {}
+  async updateEvent(req: Request, res: Response) {}
+  async getAllEvents(req: Request, res: Response) {}
+  async getEventsById(req: Request, res: Response) {}
+}
 export default new eventController();
