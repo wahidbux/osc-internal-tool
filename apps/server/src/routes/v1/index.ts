@@ -7,7 +7,6 @@ import { eventPostRouter } from "./eventPost.route";
 import { teamRouter } from "./team.route";
 import { teamMemberRouter } from "./teamMember.route";
 import { userRouter } from "./user.route";
-import { uploadRouter } from "./cloudinaryUpload.route"; // cloudinary upload router
 
 export const v1Router = Router();
 
@@ -19,4 +18,3 @@ v1Router.use("/events", eventRouter);
 v1Router.use("/teams", teamRouter);
 v1Router.use("/teams/member", teamMemberRouter);
 v1Router.use("/users", userRouter);
-v1Router.use("/cloudinary", uploadRouter); // // cloudinary upload route.....change it accordingly
