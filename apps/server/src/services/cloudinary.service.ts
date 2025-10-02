@@ -53,17 +53,14 @@ class CloudinaryService {
       const dataUri = `data:${file.mimetype};base64,${fileBase64}`;
 
       // Determine resource type based on MIME type
-      let resourceType: "image" | "video" | "raw" = "image";
-      if (file.mimetype.startsWith("video/")) {
-        resourceType = "video";
-      } else if (!file.mimetype.startsWith("image/")) {
-        resourceType = "raw";
+      if (!file.mimetype.startsWith("image/")) {
+        throw new Error("Not a valid Image")
       }
 
       // Upload to Cloudinary
       const result = await cloudinary.uploader.upload(dataUri, {
         folder: folderName,
-        resource_type: resourceType,
+        resource_type: "image",
       });
 
       if (!result || !result.secure_url) {
