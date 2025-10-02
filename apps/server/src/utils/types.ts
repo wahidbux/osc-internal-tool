@@ -2,7 +2,7 @@
  * Map the prisma schema with the corresponding
  * type definitions for controller management
  */
-export type Role = "USER" | "LEAD" | "ADMIN" | "SUBHEAD";
+export type Role = "USER" | "LEAD" | "ADMIN" | "SUBHEAD" | "MEMBER";
 export type EventCategory = "WORKSHOP" | "HACKATHON";
 export interface Team {
   name: string;
