@@ -16,6 +16,7 @@ import passport from "passport";
 import "./utils/passport";
 import type { Express } from "express";
 import morgan from "morgan";
+import { v1Router } from "./routes/v1";
 
 const app: Express = express();
 const limiter = rateLimit({
