@@ -64,6 +64,9 @@ app.use(
   })
 );
 
+// Mount API v1 routes
+app.use("/api/v1", v1Router);
+
 //error handling
 
 app.get("/", (req, res) => {
@@ -90,32 +93,6 @@ app.get("/health", async (req, res) => {
   });
 });
 
-// OAuth Routes
-app.get(
-  "/auth/github",
-  passport.authenticate("github", { scope: ["user", "repo"] })
-);
-app.get("/is-authenticated", (req, res) => {
-  const isAuthenticated = req.isAuthenticated();
-  if (isAuthenticated) {
-    res.json({ authenticated: true, user: req.user });
-  } else {
-    res.json({ authenticated: false });
-  }
-});
-
-app.get(
-  "/oauth/redirect/github",
-  passport.authenticate("github", {
-    failureRedirect:
-      process.env.FRONTEND_URL_FAIL || "http://localhost:3000/auth/error",
-    successRedirect:
-      process.env.FRONTEND_URL_SUCCESS || "http://localhost:3000",
-  }),
-  function (req, res) {
-    res.redirect("/");
-  }
-);
 
 const errorHandler = (
   error: any,

@@ -18,7 +18,7 @@ passport.use(
       clientSecret: process.env.GITHUB_OAUTH_SECRET! || "your_client_secret",
       callbackURL:
         process.env.GITHUB_CALLBACK_URL! ||
-        "http://localhost:8000/oauth/redirect/github",
+        "http://localhost:8000/api/v1/users/oauth/redirect/github",
       passReqToCallback: true,
       scope: ["user", "repo"],
     },

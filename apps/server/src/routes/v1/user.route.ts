@@ -12,9 +12,9 @@ userRouter.get(
   "/oauth/redirect/github",
   passport.authenticate("github", {
     failureRedirect:
-      process.env.FRONTEND_URL_FAIL || "http://localhost:5173/auth/error",
+      process.env.FRONTEND_URL_FAIL || "http://localhost:3000/auth/error",
     successRedirect:
-      process.env.FRONTEND_URL_SUCCESS || "http://localhost:5173",
+      process.env.FRONTEND_URL_SUCCESS || "http://localhost:3000",
   })
 );
 userRouter.get("/is-authenticated", (req, res) => {
