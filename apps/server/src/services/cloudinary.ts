@@ -6,16 +6,20 @@ cloudinary.config({
   api_secret: process.env.CLOUDINARY_API_SECRET,
 });
 
-// need to change it because change from disk to memory storage in multer 
-export const uploadOnCloudinary = async (buffer: Buffer, filename: string): Promise<string> => {
+// need to change it because change from disk to memory storage in multer
+export const uploadOnCloudinary = async (
+  buffer: Buffer,
+  filename: string,
+): Promise<string> => {
   return new Promise((resolve, reject) => {
-    const data = cloudinary.uploader.upload_stream({ resource_type: "auto", public_id: filename },
+    const data = cloudinary.uploader.upload_stream(
+      { resource_type: "auto", public_id: filename },
       (err, finalResult) => {
         if (err) return reject(err);
         resolve(finalResult?.secure_url as string);
-      }
+      },
     );
-    data.end(buffer); 
+    data.end(buffer);
   });
 };
 
@@ -27,7 +31,9 @@ export const extractPublicId = (url: string): string => {
 
     const uploadAfter = parts[1]!;
     const withoutVersion = uploadAfter.replace(/^v\d+\//, "");
-    const publicId =withoutVersion.substring(0, withoutVersion.lastIndexOf(".")) || withoutVersion; // remove the extnsn
+    const publicId =
+      withoutVersion.substring(0, withoutVersion.lastIndexOf(".")) ||
+      withoutVersion; // remove the extnsn
 
     return publicId;
   } catch (error) {
@@ -35,24 +41,19 @@ export const extractPublicId = (url: string): string => {
   }
 };
 
-
-
 export const deleteFromCloudinary = async (url: string): Promise<boolean> => {
-
   try {
-
-    if (!url || typeof url !== "string") throw new Error("No Url given or Invalid Url");
+    if (!url || typeof url !== "string")
+      throw new Error("No Url given or Invalid Url");
 
     const publicId = extractPublicId(url);
     const final = await cloudinary.uploader.destroy(publicId, {
-      resource_type: "auto", 
+      resource_type: "auto",
     });
 
-     return final.result === "ok" || final.result === "not found"; // multiple return types from cloudinary can include more if needed in future
-
+    return final.result === "ok" || final.result === "not found"; // multiple return types from cloudinary can include more if needed in future
   } catch (error) {
     console.error("Cloudinary delete error:", error);
     throw error;
   }
 };
-

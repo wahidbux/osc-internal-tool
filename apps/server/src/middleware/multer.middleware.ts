@@ -12,7 +12,7 @@ const storage = multer.memoryStorage();
 const fileFilter = (
   req: Request,
   file: Express.Multer.File,
-  cb: multer.FileFilterCallback
+  cb: multer.FileFilterCallback,
 ) => {
   // Accepted image MIME types
   const allowedMimeTypes = [
@@ -27,8 +27,8 @@ const fileFilter = (
   } else {
     cb(
       new Error(
-        `Invalid file type. Only ${allowedMimeTypes.join(", ")} are allowed.`
-      )
+        `Invalid file type. Only ${allowedMimeTypes.join(", ")} are allowed.`,
+      ),
     );
   }
 };

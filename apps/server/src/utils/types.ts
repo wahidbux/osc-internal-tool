@@ -3,7 +3,6 @@
  * type definitions for controller management
  */
 
-
 // ENUMERATION TYPES
 
 export type Role = "USER" | "LEAD" | "ADMIN" | "SUBHEAD" | "MEMBER";
@@ -72,7 +71,7 @@ export interface Event {
  * Required: userId, eventId, isPresent, entryType (all essential for participation tracking)
  */
 export interface EventParticipant {
-  userId:string;
+  userId: string;
   eventId: string;
   isPresent: Attendance;
   entryType: EntryType;
@@ -113,7 +112,6 @@ export interface EventPost {
   eventId: string;
 }
 
-
 // RESPONSE INTERFACES (for API responses)
 
 /**
@@ -121,13 +119,13 @@ export interface EventPost {
  */
 
 export interface UserResponse extends User {
-  id:string;
-  createdAt:Date;
+  id: string;
+  createdAt: Date;
   updatedAt: Date;
 }
 
 export interface TeamResponse extends Team {
-  id:string;
+  id: string;
   createdAt: Date;
   updatedAt: Date;
 }

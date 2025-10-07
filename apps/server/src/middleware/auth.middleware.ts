@@ -7,7 +7,11 @@ declare module "express-serve-static-core" {
   }
 }
 
-export default function verifyJWT(req: Request, res: Response, next: NextFunction) {
+export default function verifyJWT(
+  req: Request,
+  res: Response,
+  next: NextFunction,
+) {
   const authHeader = req.headers.authorization;
 
   if (!authHeader?.startsWith("Bearer ")) {

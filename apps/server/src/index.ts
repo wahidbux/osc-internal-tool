@@ -39,7 +39,7 @@ app.use(
       secure: false, // true if using HTTPS
       sameSite: "lax", // "none" if cross-origin over HTTPS
     },
-  })
+  }),
 );
 app.use(passport.initialize() as any);
 app.use(passport.session());
@@ -61,7 +61,7 @@ app.use(
       "Origin",
       "Accept",
     ],
-  })
+  }),
 );
 
 // Mount API v1 routes
@@ -93,12 +93,11 @@ app.get("/health", async (req, res) => {
   });
 });
 
-
 const errorHandler = (
   error: any,
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   console.log({
     error: error,

@@ -9,12 +9,11 @@ import type { Role } from "../utils/types";
 export const ALLOWED_ROLES: Role[] = ["LEAD", "ADMIN", "SUBHEAD"];
 
 class teamMemberController {
-  
   private async authorization(
     req: Request,
     res: Response,
     allowedRoles: Role[],
-    action: () => Promise<Response>
+    action: () => Promise<Response>,
   ): Promise<Response> {
     try {
       const userId = (req.user as any)?.id;
@@ -64,7 +63,9 @@ class teamMemberController {
         where: { id: memberId },
       });
 
-      return res.status(200).json({ message: "Team member removed successfully" });
+      return res
+        .status(200)
+        .json({ message: "Team member removed successfully" });
     });
   }
 

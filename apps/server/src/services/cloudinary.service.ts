@@ -37,7 +37,7 @@ class CloudinaryService {
    */
   async uploadToCloudinary(
     file: Express.Multer.File,
-    folderName: string
+    folderName: string,
   ): Promise<CloudinaryUploadResponse> {
     try {
       if (!file || !file.buffer) {
@@ -54,7 +54,7 @@ class CloudinaryService {
 
       // Determine resource type based on MIME type
       if (!file.mimetype.startsWith("image/")) {
-        throw new Error("Not a valid Image")
+        throw new Error("Not a valid Image");
       }
 
       // Upload to Cloudinary
@@ -83,7 +83,7 @@ class CloudinaryService {
    * @returns Promise with Cloudinary delete response
    */
   async deleteFromCloudinary(
-    publicId: string
+    publicId: string,
   ): Promise<CloudinaryDeleteResponse> {
     try {
       if (!publicId) {
@@ -102,7 +102,7 @@ class CloudinaryService {
     } catch (error: any) {
       console.log("Cloudinary delete error:", error);
       throw new Error(
-        error.message || "Failed to delete image from Cloudinary"
+        error.message || "Failed to delete image from Cloudinary",
       );
     }
   }
