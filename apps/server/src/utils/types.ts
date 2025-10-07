@@ -74,7 +74,7 @@ export interface Event {
 export interface EventParticipant {
   userId:string;
   eventId: string;
-  isPresent: Attendance;
+  isPresent?: Attendance;
   entryType: EntryType;
 }
 
