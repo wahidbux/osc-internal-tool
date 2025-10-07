@@ -93,7 +93,7 @@ class userController {
 
       const isPasswordCorrect = await bcrypt.compare(
         password,
-        dbUser.password as string
+        dbUser.password as string,
       );
       if (!isPasswordCorrect) throw new Error("Invalid credentials");
 

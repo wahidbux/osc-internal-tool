@@ -5,7 +5,7 @@ export const userRouter = Router();
 
 userRouter.get(
   "/oauth/github",
-  passport.authenticate("github", { scope: ["user", "repo"] })
+  passport.authenticate("github", { scope: ["user", "repo"] }),
 );
 
 userRouter.get(
@@ -15,7 +15,7 @@ userRouter.get(
       process.env.FRONTEND_URL_FAIL || "http://localhost:3000/auth/error",
     successRedirect:
       process.env.FRONTEND_URL_SUCCESS || "http://localhost:3000",
-  })
+  }),
 );
 userRouter.get("/is-authenticated", (req, res) => {
   const isAuthenticated = req.isAuthenticated();
