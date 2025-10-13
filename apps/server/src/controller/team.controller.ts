@@ -19,13 +19,11 @@ class teamController {
       if (!user) throw new Error("User not authenticated");
 
       if (!(user.role === Role.ADMIN || user.role === Role.LEAD)) {
-        return res
-          .status(403)
-          .json({
-            message: "Unauthorized: Only admins or leads can create teams",
-            error: true,
-            data: null,
-          });
+        return res.status(403).json({
+          message: "Unauthorized: Only admins or leads can create teams",
+          error: true,
+          data: null,
+        });
       }
 
       const { data }: { data: Team } = req.body;
@@ -66,13 +64,11 @@ class teamController {
       if (!user) throw new Error("User not authenticated");
 
       if (!(user.role === Role.ADMIN || user.role === Role.LEAD)) {
-        return res
-          .status(403)
-          .json({
-            error: true,
-            message: "Unauthorized: Only admins or leads can remove teams",
-            data: null,
-          });
+        return res.status(403).json({
+          error: true,
+          message: "Unauthorized: Only admins or leads can remove teams",
+          data: null,
+        });
       }
 
       const { name } = req.body;
@@ -119,14 +115,12 @@ class teamController {
       }
 
       if (!(user.role === Role.ADMIN || user.role === Role.LEAD)) {
-        return res
-          .status(403)
-          .json({
-            error: true,
-            message:
-              "Unauthorized: Only admins or leads can make changes in teams",
-            data: null,
-          });
+        return res.status(403).json({
+          error: true,
+          message:
+            "Unauthorized: Only admins or leads can make changes in teams",
+          data: null,
+        });
       }
 
       const { id } = req.params; // team id from URL or if you want to search it by name then please mention in comments
@@ -139,13 +133,11 @@ class teamController {
       }
 
       if (!name && !description) {
-        return res
-          .status(400)
-          .json({
-            error: true,
-            message: "At least one field is required to update",
-            data: null,
-          });
+        return res.status(400).json({
+          error: true,
+          message: "At least one field is required to update",
+          data: null,
+        });
       }
 
       const dataUpdated: any = {};
@@ -157,22 +149,18 @@ class teamController {
         data: dataUpdated,
       });
 
-      return res
-        .status(200)
-        .json({
-          error: false,
-          message: "Team updated successfully",
-          data: updatedTeam,
-        });
+      return res.status(200).json({
+        error: false,
+        message: "Team updated successfully",
+        data: updatedTeam,
+      });
     } catch (error: any) {
       console.error(error);
-      return res
-        .status(500)
-        .json({
-          error: true,
-          message: error.message || "Something went wrong",
-          data: null,
-        });
+      return res.status(500).json({
+        error: true,
+        message: error.message || "Something went wrong",
+        data: null,
+      });
     }
   }
   async getAllTeams(req: Request, res: Response) {
