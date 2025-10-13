@@ -68,21 +68,17 @@ uploadRouter.post("/delete/cloudinary", async (req: Request, res: Response) => {
 
     const deleted = await deleteFromCloudinary(url); // either true or false
 
-    return res
-      .status(200)
-      .json({
-        success: deleted,
-        message: deleted
-          ? "File deleted successfully"
-          : "File not found on Cloudinary",
-      });
+    return res.status(200).json({
+      success: deleted,
+      message: deleted
+        ? "File deleted successfully"
+        : "File not found on Cloudinary",
+    });
   } catch (error: any) {
     console.error("Cloudinary delete route error:", error);
-    return res
-      .status(500)
-      .json({
-        success: false,
-        message: error.message || "Deletion failed from cloudinary",
-      });
+    return res.status(500).json({
+      success: false,
+      message: error.message || "Deletion failed from cloudinary",
+    });
   }
 });

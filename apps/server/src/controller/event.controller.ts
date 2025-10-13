@@ -112,19 +112,18 @@ class eventController {
       if (!checkId) {
         throw new Error("Event doesn't exist");
       }
-     return res.json({
-      data:checkId,
-      message:"Event found Successfully",
-      error:null
-     })
-    } catch (error:any) {
+      return res.json({
+        data: checkId,
+        message: "Event found Successfully",
+        error: null,
+      });
+    } catch (error: any) {
       return res.json({
         data: null,
         message: error.message,
         error: error,
       });
     }
-    
   }
 }
 export default new eventController();
