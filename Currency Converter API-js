@@ -1,0 +1,14 @@
+import express from "express";
+const app = express();
+app.use(express.json());
+
+const rates = { USD: 1, EUR: 0.92, PKR: 277.5, INR: 83.1 };
+
+app.post("/convert", (req, res) => {
+  const { from, to, amount } = req.body;
+  if (!rates[from] || !rates[to]) return res.status(400).json({ message: "Invalid currency" });
+  const converted = (amount / rates[from]) * rates[to];
+  res.json({ from, to, amount, converted: converted.toFixed(2) });
+});
+
+app.listen(3011);
